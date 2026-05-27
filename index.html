@@ -1,36 +1,545 @@
-Analisei o possível erro via ChatGPT ele me disse que pode haver erro conforme abaixo 
-Sim — isso é erro no código, não no PDF.
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Cotador RC Médica — BI2 / KOVR</title>
+<style>
+:root {
+  --azul:#1a3a5c; --azul-medio:#2563a8; --azul-claro:#e8f0fa;
+  --borda:#d0d7e3; --texto:#222; --texto-sec:#555;
+  --verde:#1a6633; --laranja:#c97a00; --vermelho:#c0392b; --fundo:#eef2f7;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--fundo);color:var(--texto);}
+.wrap{max-width:900px;margin:0 auto;padding:2rem 1rem 4rem;}
+.sys-header{background:var(--azul);color:#fff;padding:1.25rem 2rem;border-radius:12px 12px 0 0;display:flex;align-items:center;gap:16px;}
+.sys-header h1{font-size:20px;font-weight:700;}
+.sys-header p{font-size:13px;opacity:.7;margin-top:2px;}
+.badge-uso{margin-left:auto;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:20px;padding:4px 14px;font-size:12px;white-space:nowrap;}
+.form-card{background:#fff;border:1px solid var(--borda);border-top:none;border-radius:0 0 12px 12px;padding:2rem;}
+.sec-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--azul-medio);border-bottom:2px solid var(--azul-claro);padding-bottom:6px;margin-bottom:1rem;margin-top:1.75rem;}
+.sec-label:first-of-type{margin-top:0;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.field{display:flex;flex-direction:column;gap:5px;}
+.field label{font-size:12px;font-weight:600;color:var(--texto-sec);}
+.field input,.field select,.field textarea{padding:9px 12px;border:1px solid var(--borda);border-radius:7px;font-size:14px;color:var(--texto);background:#fff;transition:border .2s;}
+.field input:focus,.field select:focus{outline:none;border-color:var(--azul-medio);box-shadow:0 0 0 3px rgba(37,99,168,.1);}
+.field textarea{resize:vertical;min-height:65px;}
+.opcional{font-size:11px;color:#aaa;font-weight:400;margin-left:4px;}
+.toggle-row{display:flex;gap:10px;}
+.tbtn{flex:1;padding:9px 12px;border:1.5px solid var(--borda);border-radius:8px;background:#fff;cursor:pointer;font-size:14px;color:var(--texto-sec);text-align:center;transition:all .18s;}
+.tbtn.on{border-color:var(--azul-medio);background:var(--azul-claro);color:var(--azul);font-weight:600;}
+.tbtn:hover:not(.on){border-color:#aab;background:#f5f7fa;}
+.info-box{border-radius:8px;padding:10px 14px;font-size:13px;margin-top:.75rem;}
+.info-am{background:#fff8e8;border:1px solid #f0d67a;color:#7a5a00;}
+.info-az{background:var(--azul-claro);border:1px solid #b3cdf0;color:#0a4a8a;}
+.plano-tag{align-items:center;gap:12px;padding:11px 16px;border-radius:9px;border:1.5px solid var(--azul-medio);background:var(--azul-claro);margin-top:12px;display:none;}
+.plano-tag .pill{padding:4px 12px;border-radius:20px;font-size:13px;font-weight:700;}
+.plano-tag .desc{font-size:13px;color:var(--azul);}
+.opcao-card{display:flex;align-items:center;gap:12px;padding:11px 14px;border:2px solid var(--borda);border-radius:9px;cursor:pointer;transition:all .15s;margin-bottom:7px;background:#fff;user-select:none;}
+.opcao-card:hover{border-color:var(--azul-medio);background:#f7faff;}
+.opcao-card.sel{border-color:var(--azul-medio);background:var(--azul-claro);}
+.opcao-card .chk{width:20px;height:20px;min-width:20px;border:2px solid var(--borda);border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:13px;transition:all .15s;background:#fff;}
+.opcao-card.sel .chk{background:var(--azul-medio);border-color:var(--azul-medio);color:#fff;}
+.op-cod{font-weight:700;color:var(--azul);font-size:14px;min-width:36px;}
+.op-lmi{font-size:13px;color:var(--texto-sec);min-width:95px;}
+.op-tags{display:flex;flex-wrap:wrap;gap:4px;flex:1;}
+.tag{font-size:11px;padding:2px 7px;border-radius:10px;font-weight:600;white-space:nowrap;}
+.tag-ap{background:#dbeeff;color:#0a4a8a;}
+.tag-dit{background:#d4f5e2;color:#1a6633;}
+.tag-rcp{background:#f0f0f0;color:#666;}
+.op-precos{text-align:right;min-width:185px;}
+.p-cheio{font-size:11px;color:#bbb;text-decoration:line-through;}
+.p-desc{font-size:13px;font-weight:700;color:var(--verde);}
+.p-dbadge{display:inline-block;background:#d4f5e2;color:#1a6633;font-size:10px;font-weight:700;padding:1px 5px;border-radius:5px;margin-left:3px;}
+.p-cartao{font-size:12px;color:var(--azul-medio);font-weight:600;margin-top:2px;}
+.p-boleto{font-size:11px;color:#bbb;margin-top:1px;}
+.btn-gerar{width:100%;margin-top:1.5rem;padding:14px;background:var(--azul);color:#fff;border:none;border-radius:9px;font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:background .2s;}
+.btn-gerar:hover{background:var(--azul-medio);}
+.btn-gerar:disabled{background:#aaa;cursor:not-allowed;}
+.spinner{width:20px;height:20px;border:3px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.erro-box{background:#fdf0f0;border:1px solid #f5c6c6;color:var(--vermelho);padding:10px 14px;border-radius:8px;font-size:13px;margin-top:1rem;display:none;}
+.pe{color:#1a6633;}.bge{background:#d4f5e2;}
+.pd{color:#0a4a8a;}.bgd{background:#dbeeff;}
+.pr{color:#8a0a0a;}.bgr{background:#ffe0e0;}
+.pa{color:#4a0a8a;}.bga{background:#ede0ff;}
+.ppill{display:inline-block;padding:2px 9px;border-radius:12px;font-size:11px;font-weight:700;}
+#proposta{display:none;margin-top:2rem;background:#fff;border:1px solid var(--borda);border-radius:12px;overflow:hidden;}
+.acoes{display:flex;gap:10px;padding:16px 28px;background:#f7f9fc;border-bottom:1px solid var(--borda);}
+.btn-a{flex:1;padding:11px;border:1.5px solid var(--borda);border-radius:8px;background:#fff;color:var(--texto);font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .2s;}
+.btn-a:hover{background:var(--azul-claro);border-color:var(--azul-medio);}
+.btn-a.prim{background:var(--azul);color:#fff;border-color:var(--azul);}
+.btn-a.prim:hover{background:var(--azul-medio);}
+/* === PROPOSTA IMPRESSA === */
+#prop-html{font-family:'Segoe UI',Arial,sans-serif;}
+.ph-bar{background:#1a3a5c;padding:18px 28px;display:flex;align-items:center;justify-content:space-between;}
+.logo-bi2{background:#fff;border-radius:6px;padding:5px 12px;font-weight:900;font-size:18px;color:#1a3a5c;letter-spacing:-1px;line-height:1.2;}
+.logo-bi2 small{font-size:10px;display:block;font-weight:400;color:#555;letter-spacing:0;}
+.logo-kovr{color:#fff;font-size:20px;font-weight:900;letter-spacing:-1px;}
+.logo-kovr em{font-style:normal;color:#7ec8e3;}
+.ph-right{color:rgba(255,255,255,.7);font-size:12px;text-align:right;}
+.ph-titulo{background:#2563a8;color:#fff;text-align:center;padding:12px 20px;}
+.ph-titulo h2{font-size:14px;font-weight:700;letter-spacing:.02em;}
+.ph-titulo p{font-size:12px;opacity:.85;margin-top:3px;}
+.pbody{padding:24px 28px;background:#fff;}
+.pst{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#1a3a5c;border-bottom:2px solid #2563a8;padding-bottom:5px;margin-bottom:12px;margin-top:22px;}
+.pst:first-child{margin-top:0;}
+.dgrid{display:grid;grid-template-columns:1fr 1fr;gap:2px 24px;}
+.di{font-size:13px;padding:5px 0;border-bottom:1px solid #f0f0f0;display:flex;justify-content:space-between;gap:8px;}
+.di .dk{color:#1a3a5c;font-weight:600;white-space:nowrap;}
+.di .dv{color:#222;text-align:right;}
+.pt{width:100%;border-collapse:collapse;font-size:12px;}
+.pt th{background:#1a3a5c;color:#fff;padding:8px 10px;text-align:left;font-size:11px;font-weight:600;}
+.pt td{padding:9px 10px;border-bottom:1px solid #eef0f4;vertical-align:top;}
+.pt tr:nth-child(even) td{background:#f7f9fc;}
+.tc{font-weight:700;color:#1a3a5c;}
+.td-cheio{font-size:11px;color:#bbb;text-decoration:line-through;}
+.td-desc{font-size:13px;font-weight:700;color:#1a6633;}
+.td-db{display:inline-block;background:#d4f5e2;color:#1a6633;font-size:10px;font-weight:700;padding:1px 5px;border-radius:5px;margin-left:3px;}
+.td-cartao{font-size:12px;color:#2563a8;font-weight:600;margin-top:3px;}
+.td-boleto{font-size:11px;color:#bbb;margin-top:2px;}
+.cgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+.cbox{border-radius:8px;padding:14px 12px;text-align:center;}
+.cbox.proc{background:#e8f0fa;border:1px solid #b3cdf0;}
+.cbox.acor{background:#e8f5ec;border:1px solid #9fd3ae;}
+.cbox.emer{background:#fff8e8;border:1px solid #f0d67a;}
+.cperc{font-size:26px;font-weight:900;}
+.cbox.proc .cperc{color:#1a3a5c;}
+.cbox.acor .cperc{color:#1a6633;}
+.cbox.emer .cperc{color:#c97a00;}
+.clabel{font-size:11px;font-weight:600;color:#555;margin-top:5px;line-height:1.5;}
+.condgrid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.condlist{list-style:none;font-size:13px;}
+.condlist li{padding:5px 0;border-bottom:1px solid #f0f0f0;display:flex;justify-content:space-between;gap:8px;}
+.condlist .ck{color:#555;}
+.condlist .cv{color:#1a3a5c;font-weight:600;text-align:right;}
+.pfooter{background:#1a3a5c;color:rgba(255,255,255,.7);text-align:center;padding:12px;font-size:11px;}
+.pfooter strong{color:#fff;}
+@media(max-width:640px){
+  .grid2,.dgrid,.condgrid,.cgrid{grid-template-columns:1fr;}
+  .acoes{flex-direction:column;}
+  .op-precos{display:none;}
+}
+@media print{
+  *{ -webkit-print-color-adjust:exact!important; print-color-adjust:exact!important; color-adjust:exact!important; }
+  body{background:#fff!important;}
+  .wrap{padding:0!important;max-width:100%!important;}
+  .form-card,.sys-header,.acoes{display:none!important;}
+  #proposta{display:block!important;border:none!important;border-radius:0!important;margin:0!important;}
+  .pbody{padding:16px 20px!important;}
+  .ph-bar{background:#1a3a5c!important;}
+  .ph-titulo{background:#2563a8!important;}
+  .pfooter{background:#1a3a5c!important;}
+  .cbox.proc{background:#e8f0fa!important;}
+  .cbox.acor{background:#e8f5ec!important;}
+  .cbox.emer{background:#fff8e8!important;}
+  .pt th{background:#1a3a5c!important;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
 
-O formulário está publicado, mas a função que gera a proposta provavelmente está procurando as coberturas com um nome diferente do que os checkboxes usam.
+<div class="sys-header">
+  <div style="font-size:28px">🛡️</div>
+  <div><h1>Cotador RC Médica — BI2 / KOVR</h1><p>Responsabilidade Civil Profissional · Uso interno dos consultores</p></div>
+  <div class="badge-uso">🔒 Consultores</div>
+</div>
 
-O erro deve estar numa linha parecida com esta:
+<div class="form-card">
 
-const selecionados = document.querySelectorAll('input[name="cobertura"]:checked');
+  <div class="sec-label">Dados do médico</div>
+  <div class="grid2">
+    <div class="field" style="grid-column:1/-1"><label>Nome completo do médico</label><input type="text" id="nome" placeholder="Dr. João da Silva"/></div>
+    <div class="field"><label>CRM</label><input type="text" id="crm" placeholder="CRM/SP 123456"/></div>
+    <div class="field"><label>Especialidade — preenchida automaticamente</label><input type="text" id="esp-display" readonly style="background:#f5f5f5;color:#888;cursor:not-allowed;" placeholder="Detectada ao selecionar abaixo"/></div>
+  </div>
 
-Mas no HTML seus planos podem estar com outro name, por exemplo:
+  <div class="sec-label">Dados do consultor</div>
+  <div class="grid2">
+    <div class="field"><label>Nome do consultor responsável</label><input type="text" id="consultor" placeholder="Nome do consultor"/></div>
+    <div class="field"><label>Telefone / WhatsApp <span class="opcional">(opcional)</span></label><input type="text" id="tel-consultor" placeholder="(11) 99999-9999"/></div>
+  </div>
 
-<input type="checkbox" name="plano">
+  <div class="sec-label">Perfil profissional</div>
 
-ou sem name.
+  <div class="field" style="margin-bottom:14px">
+    <label>O médico está em residência médica?</label>
+    <div class="toggle-row">
+      <button class="tbtn on" data-grp="res" data-val="nao" onclick="setToggle('res','nao');renderOpcoes()">👨‍⚕️ Não — médico formado</button>
+      <button class="tbtn" data-grp="res" data-val="sim" onclick="setToggle('res','sim');renderOpcoes()">🎓 Sim — residente</button>
+    </div>
+  </div>
 
-Correção provável
+  <div id="bloco-res" style="display:none;margin-bottom:14px;">
+    <div class="field"><label>Área da residência</label>
+      <div class="toggle-row">
+        <button class="tbtn on" data-grp="ares" data-val="geral" onclick="setToggle('ares','geral');renderOpcoes()">Todas as especialidades (exceto GO)</button>
+        <button class="tbtn" data-grp="ares" data-val="go" onclick="setToggle('ares','go');renderOpcoes()">Ginecologia e Obstetrícia (GO)</button>
+      </div>
+    </div>
+    <div class="info-box info-am" style="margin-top:10px">ℹ️ Residentes usam o <strong>Plano Ametista</strong>. Residentes de GO têm precificação diferente (A03 e A04).</div>
+  </div>
 
-No GitHub, abra o arquivo index.html, clique no lápis e procure por:
+  <div id="bloco-form">
+    <div class="field"><label>Especialidade médica</label>
+      <select id="esp" onchange="onEspChange()">
+        <option value="">Selecione a especialidade...</option>
+        <optgroup label="— Ginecologia e Obstetrícia (Plano Rubi)">
+          <option value="gin_obs">Ginecologia e Obstetrícia</option>
+        </optgroup>
+        <optgroup label="— Especialidades cirúrgicas (Plano Diamante)">
+          <option value="cirurgia_geral">Cirurgia Geral</option>
+          <option value="anestesiologia">Anestesiologia</option>
+          <option value="ortopedia">Ortopedia e Traumatologia</option>
+          <option value="neurocirurgia">Neurocirurgia</option>
+          <option value="urologia_cir">Urologia (procedimentos cirúrgicos)</option>
+          <option value="oftalmologia_cir">Oftalmologia (cirurgias)</option>
+          <option value="gastro_cir">Gastroenterologia (endoscopia/procedimentos)</option>
+          <option value="cardio_int">Cardiologia Intervencionista</option>
+          <option value="outros_cir">Outros cirurgiões</option>
+          <option value="outras_cir_geral">Outras especialidades (com cirurgia)</option>
+        </optgroup>
+        <optgroup label="— Especialidades sem cirurgia (Plano Esmeralda)">
+          <option value="clinica_medica">Clínica Médica</option>
+          <option value="dermatologia">Dermatologia</option>
+          <option value="pediatria">Pediatria</option>
+          <option value="psiquiatria">Psiquiatria</option>
+          <option value="radiologia">Radiologia / Diagnóstico por Imagem</option>
+          <option value="oncologia">Oncologia Clínica</option>
+          <option value="endocrinologia">Endocrinologia</option>
+          <option value="reumatologia">Reumatologia</option>
+          <option value="pneumologia">Pneumologia</option>
+          <option value="neurologia">Neurologia Clínica</option>
+          <option value="geriatria">Geriatria</option>
+          <option value="cardiologia_clin">Cardiologia Clínica</option>
+          <option value="outra_sem_cir">Outra especialidade (sem cirurgia)</option>
+        </optgroup>
+      </select>
+    </div>
+    <div id="plano-tag" class="plano-tag"><span id="pt-pill" class="pill"></span><span id="pt-desc" class="desc"></span></div>
+  </div>
 
-querySelectorAll
+  <div class="field" style="margin-top:14px">
+    <label>Histórico de sinistros (últimos 5 anos)</label>
+    <div class="toggle-row">
+      <button class="tbtn on" data-grp="sin" data-val="nenhum" onclick="setToggle('sin','nenhum')">Nenhum sinistro</button>
+      <button class="tbtn" data-grp="sin" data-val="um" onclick="setToggle('sin','um')">1 sinistro</button>
+      <button class="tbtn" data-grp="sin" data-val="dois_mais" onclick="setToggle('sin','dois_mais')">2 ou mais</button>
+    </div>
+  </div>
 
-Ache a linha das coberturas e troque por algo mais amplo:
+  <div class="sec-label" style="margin-top:1.75rem">Coberturas para incluir na proposta</div>
+  <p style="font-size:13px;color:var(--texto-sec);margin-bottom:14px;">Clique nas opções desejadas. Você pode selecionar mais de uma para apresentar alternativas ao cliente.</p>
+  <div id="opcoes-wrap"><div class="info-box info-az">👆 Selecione a especialidade acima para ver as opções disponíveis.</div></div>
 
-const selecionados = document.querySelectorAll('#opcoes-cobertura input[type="checkbox"]:checked');
+  <div class="field" style="margin-top:1.5rem"><label>Observações adicionais <span class="opcional">(opcional)</span></label><textarea id="obs" placeholder="Ex: médico recém-formado, atua em dois hospitais..."></textarea></div>
 
-Se no seu código o bloco tiver outro nome, pode ser:
+  <div class="erro-box" id="erro"></div>
+  <button class="btn-gerar" id="btn-gerar" onclick="gerarProposta()">🧮 Gerar proposta de cotação</button>
 
-const selecionados = document.querySelectorAll('#coberturas input[type="checkbox"]:checked');
+</div>
 
-O mais comum é o Claude ter criado os checkboxes em um lugar e a função estar tentando ler outro.
+<!-- PROPOSTA -->
+<div id="proposta">
+  <div class="acoes">
+    <button class="btn-a" onclick="novaCotacao()">🔄 Nova cotação</button>
+    <button class="btn-a prim" onclick="gerarPDF()">📄 Baixar PDF</button>
+  </div>
+  <div id="prop-html">
+    <div class="ph-bar">
+      <div style="display:flex;align-items:center;gap:20px">
+        <div class="logo-bi2">B|2<small>Brazilian Insurance Institute</small></div>
+        <div style="color:rgba(255,255,255,.3);font-size:24px">|</div>
+        <div class="logo-kovr"><em>kovr</em>seguradora</div>
+      </div>
+      <div class="ph-right">Proposta Comercial<br/><span id="ph-data"></span></div>
+    </div>
+    <div class="ph-titulo">
+      <h2>PROPOSTA COMERCIAL — SEGURO DE RESPONSABILIDADE CIVIL PROFISSIONAL</h2>
+      <p id="ph-sub"></p>
+    </div>
+    <div class="pbody">
 
-Outra possibilidade: você marcou cards/planos visuais, mas o checkbox real não está sendo marcado. Nesse caso precisa trocar o clique do card para também marcar o checkbox.
+      <div class="pst">Dados do proponente</div>
+      <div class="dgrid">
+        <div class="di"><span class="dk">Nome</span><span class="dv" id="ph-nome"></span></div>
+        <div class="di"><span class="dk">Especialidade</span><span class="dv" id="ph-esp"></span></div>
+        <div class="di"><span class="dk">CRM</span><span class="dv" id="ph-crm"></span></div>
+        <div class="di"><span class="dk">Data</span><span class="dv" id="ph-data2"></span></div>
+        <div class="di"><span class="dk">Consultora</span><span class="dv" id="ph-consul"></span></div>
+        <div class="di"><span class="dk">Perfil</span><span class="dv" id="ph-perfil"></span></div>
+      </div>
 
-Me mande um print da parte do código onde aparece function gerarProposta ou querySelectorAll, que eu te digo exatamente qual linha trocar.
+      <div class="pst" style="margin-top:20px">Opções de cobertura e preços</div>
+      <div id="ph-tabela"></div>
+      <p style="font-size:11px;color:#888;margin-top:8px;line-height:1.5;">
+        * <strong>À vista:</strong> desconto de 7% sobre o prêmio anual. &nbsp;
+        <strong>Boleto parcelado:</strong> disponível conforme condições da Estipulante BI2. &nbsp;
+        RCP = Responsabilidade Civil Profissional | AP = Acidente Pessoal | DIT = Diária por Incapacidade Temporária. &nbsp;
+        Valores ilustrativos, sujeitos a alteração.
+      </p>
 
-Acredita que esse é o erro e tem como corrigir para subir outro arquivo xml no github para acertar isso ?
+      <div class="pst" style="margin-top:20px">Composição das coberturas — destinação do limite RCP</div>
+      <div id="ph-comp"></div>
+      <p style="font-size:10px;color:#999;margin-top:10px;font-style:italic;line-height:1.5;">* A separação proporcional do capital por destinação é uma exigência regulatória estabelecida pelo Marco Legal do Seguro, regulamentado pela SUSEP em dezembro de 2025, garantindo ao segurado transparência na utilização dos recursos da apólice.</p>
+
+      <div class="pst" style="margin-top:20px">Condições gerais e contato</div>
+      <div class="condgrid">
+        <ul class="condlist">
+          <li><span class="ck">Seguradora</span><span class="cv">KOVR Seguradora</span></li>
+          <li><span class="ck">Estipulante</span><span class="cv">BI2 — Brazilian Insurance Institute</span></li>
+          <li><span class="ck">Vigência</span><span class="cv">12 meses, renovável anualmente</span></li>
+          <li><span class="ck">Retroatividade</span><span class="cv">5 anos</span></li>
+          <li><span class="ck">Franquia</span><span class="cv">Sem franquia</span></li>
+          <li><span class="ck">Pagamento</span><span class="cv">À vista (7% desc.) ou 12x cartão</span></li>
+        </ul>
+        <ul class="condlist" id="lista-contato">
+          <li><span class="ck">Consultora</span><span class="cv" id="ph-consul2"></span></li>
+          <li id="li-tel" style="display:none"><span class="ck">WhatsApp</span><span class="cv" id="ph-tel"></span></li>
+          <li><span class="ck">Parceria</span><span class="cv">BI2 · KOVR Seguradora</span></li>
+        </ul>
+      </div>
+      <p style="font-size:11px;color:#888;margin-top:12px;font-style:italic;">Proposta válida por 30 dias. Sujeita à análise cadastral e aceitação da seguradora. Valores meramente ilustrativos, podendo sofrer alterações a qualquer momento.</p>
+    </div>
+    <div class="pfooter">
+      <strong>Brazilian Insurance Institute – BI2 | KOVR Seguradora</strong>
+    </div>
+  </div>
+</div>
+
+</div><!-- /wrap -->
+
+<script>
+const SEL=new Set();
+const DIAM=new Set(['cirurgia_geral','anestesiologia','ortopedia','neurocirurgia','urologia_cir','oftalmologia_cir','gastro_cir','cardio_int','outros_cir','outras_cir_geral']);
+const ESP_LABEL={gin_obs:'Ginecologista Obstetra',cirurgia_geral:'Cirurgião Geral',anestesiologia:'Anestesiologista',ortopedia:'Ortopedista e Traumatologista',neurocirurgia:'Neurocirurgião',urologia_cir:'Urologista (cirúrgico)',oftalmologia_cir:'Oftalmologista (cirurgias)',gastro_cir:'Gastroenterologista (procedimentos)',cardio_int:'Cardiologista Intervencionista',outros_cir:'Cirurgião',outras_cir_geral:'Médico (com procedimentos cirúrgicos)',clinica_medica:'Clínico Geral',dermatologia:'Dermatologista',pediatria:'Pediatra',psiquiatria:'Psiquiatra',radiologia:'Radiologista',oncologia:'Oncologista Clínico',endocrinologia:'Endocrinologista',reumatologia:'Reumatologista',pneumologia:'Pneumologista',neurologia:'Neurologista Clínico',geriatria:'Geriatra',cardiologia_clin:'Cardiologista Clínico',outra_sem_cir:'Médico'};
+
+const PLANOS={
+  ametista_geral:{nome:'Ametista',badge:'pa',bg:'bga',subtipo:'Residente Médico (exceto GO) — Retroatividade 5 anos',opcoes:[
+    {cod:'A01',lmi:'R$ 250.000',lv:250000,ap:'-',dit:'-',bruto:2294.96,c12:191.29,b12:196.07},
+    {cod:'A02',lmi:'R$ 500.000',lv:500000,ap:'-',dit:'-',bruto:3659.52,c12:305.03,b12:312.66}]},
+  ametista_go:{nome:'Ametista GO',badge:'pa',bg:'bga',subtipo:'Residente — Ginecologia e Obstetrícia — Retroatividade 5 anos',opcoes:[
+    {cod:'A03',lmi:'R$ 250.000',lv:250000,ap:'-',dit:'-',bruto:2667.11,c12:222.31,b12:227.87},
+    {cod:'A04',lmi:'R$ 500.000',lv:500000,ap:'-',dit:'-',bruto:4403.83,c12:367.07,b12:376.25}]},
+  esmeralda:{nome:'Esmeralda',badge:'pe',bg:'bge',subtipo:'Sem Procedimentos Cirúrgicos — Retroatividade 5 anos',opcoes:[
+    {cod:'E01',lmi:'R$ 250.000',lv:250000,ap:'-',dit:'-',bruto:1942.87,c12:161.94,b12:165.99},
+    {cod:'E02',lmi:'R$ 250.000',lv:250000,ap:'100 mil',dit:'9 mil',bruto:7151.32,c12:581.94,b12:596.49},
+    {cod:'E03',lmi:'R$ 250.000',lv:250000,ap:'200 mil',dit:'18 mil',bruto:8806.45,c12:716.63,b12:734.54},
+    {cod:'E04',lmi:'R$ 500.000',lv:500000,ap:'-',dit:'-',bruto:3028.32,c12:252.42,b12:258.73},
+    {cod:'E05',lmi:'R$ 500.000',lv:500000,ap:'100 mil',dit:'9 mil',bruto:8237.85,c12:670.27,b12:687.02},
+    {cod:'E06',lmi:'R$ 500.000',lv:500000,ap:'200 mil',dit:'18 mil',bruto:9440.86,c12:768.25,b12:787.46}]},
+  diamante:{nome:'Diamante',badge:'pd',bg:'bgd',subtipo:'Com Procedimentos Cirúrgicos — Retroatividade 5 anos',opcoes:[
+    {cod:'D01',lmi:'R$ 250.000',lv:250000,ap:'-',dit:'-',bruto:3193.55,c12:259.88,b12:266.37},
+    {cod:'D02',lmi:'R$ 250.000',lv:250000,ap:'100 mil',dit:'9 mil',bruto:8150.54,c12:663.25,b12:679.83},
+    {cod:'D03',lmi:'R$ 250.000',lv:250000,ap:'200 mil',dit:'18 mil',bruto:9440.86,c12:768.25,b12:787.46},
+    {cod:'D04',lmi:'R$ 500.000',lv:500000,ap:'-',dit:'-',bruto:5209.10,c12:434.28,b12:445.14},
+    {cod:'D05',lmi:'R$ 500.000',lv:500000,ap:'100 mil',dit:'9 mil',bruto:10418.62,c12:847.82,b12:869.01},
+    {cod:'D06',lmi:'R$ 500.000',lv:500000,ap:'200 mil',dit:'18 mil',bruto:11644.43,c12:947.57,b12:971.26},
+    {cod:'D07',lmi:'R$ 1.000.000',lv:1000000,ap:'-',dit:'-',bruto:7075.27,c12:592.57,b12:607.61},
+    {cod:'D08',lmi:'R$ 1.000.000',lv:1000000,ap:'100 mil',dit:'9 mil',bruto:12408.60,c12:1009.75,b12:1034.99},
+    {cod:'D09',lmi:'R$ 1.000.000',lv:1000000,ap:'200 mil',dit:'18 mil',bruto:13634.41,c12:1109.50,b12:1137.24}]},
+  rubi:{nome:'Rubi',badge:'pr',bg:'bgr',subtipo:'Ginecologia e Obstetrícia — Retroatividade 5 anos',opcoes:[
+    {cod:'R01',lmi:'R$ 250.000',lv:250000,ap:'-',dit:'-',bruto:4182.80,c12:340.38,b12:348.88},
+    {cod:'R02',lmi:'R$ 250.000',lv:250000,ap:'100 mil',dit:'9 mil',bruto:9188.17,c12:747.69,b12:766.38},
+    {cod:'R03',lmi:'R$ 250.000',lv:250000,ap:'200 mil',dit:'18 mil',bruto:10623.66,c12:864.50,b12:886.11},
+    {cod:'R04',lmi:'R$ 500.000',lv:500000,ap:'-',dit:'-',bruto:6439.78,c12:522.94,b12:536.01},
+    {cod:'R05',lmi:'R$ 500.000',lv:500000,ap:'100 mil',dit:'9 mil',bruto:11493.55,c12:935.29,b12:958.67},
+    {cod:'R06',lmi:'R$ 500.000',lv:500000,ap:'200 mil',dit:'18 mil',bruto:12989.25,c12:1057.00,b12:1083.43},
+    {cod:'R07',lmi:'R$ 1.000.000',lv:1000000,ap:'-',dit:'-',bruto:9122.58,c12:754.69,b12:773.56},
+    {cod:'R08',lmi:'R$ 1.000.000',lv:1000000,ap:'100 mil',dit:'9 mil',bruto:14247.31,c12:1159.38,b12:1188.36},
+    {cod:'R09',lmi:'R$ 1.000.000',lv:1000000,ap:'200 mil',dit:'18 mil',bruto:16116.13,c12:1311.54,b12:1344.33}]}
+};
+
+function fmt(v){return v.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});}
+function getVal(g){const e=document.querySelector('.tbtn.on[data-grp="'+g+'"]');return e?e.dataset.val:'';}
+
+function setToggle(g,v){
+  document.querySelectorAll('.tbtn[data-grp="'+g+'"]').forEach(b=>b.classList.toggle('on',b.dataset.val===v));
+  if(g==='res'){
+    document.getElementById('bloco-res').style.display=v==='sim'?'block':'none';
+    document.getElementById('bloco-form').style.display=v==='nao'?'block':'none';
+  }
+}
+
+function getPlanoKey(){
+  const res=getVal('res'),ares=getVal('ares');
+  if(res==='sim') return ares==='go'?'ametista_go':'ametista_geral';
+  const esp=document.getElementById('esp').value;
+  if(esp==='gin_obs') return 'rubi';
+  if(DIAM.has(esp)) return 'diamante';
+  return 'esmeralda';
+}
+
+function onEspChange(){
+  const esp=document.getElementById('esp').value;
+  const tag=document.getElementById('plano-tag');
+  document.getElementById('esp-display').value=esp?ESP_LABEL[esp]||'':'';
+  if(!esp){tag.style.display='none';renderOpcoes();return;}
+  const key=getPlanoKey(),pl=PLANOS[key];
+  document.getElementById('pt-pill').textContent=pl.nome;
+  document.getElementById('pt-pill').className='pill '+pl.bg+' '+pl.badge;
+  document.getElementById('pt-desc').textContent=pl.subtipo;
+  tag.style.display='flex';
+  renderOpcoes();
+}
+
+function renderOpcoes(){
+  SEL.clear();
+  const res=getVal('res');
+  if(res==='nao'&&!document.getElementById('esp').value){
+    document.getElementById('opcoes-wrap').innerHTML='<div class="info-box info-az">👆 Selecione a especialidade acima para ver as opções disponíveis.</div>';
+    return;
+  }
+  const key=getPlanoKey(),pl=PLANOS[key];
+  let html='<div style="border:1px solid var(--borda);border-radius:10px;overflow:hidden;"><div style="padding:10px 14px;background:var(--azul);color:#fff;display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span class="ppill '+pl.bg+' '+pl.badge+'">'+pl.nome+'</span><span style="font-size:12px;opacity:.85">'+pl.subtipo+'</span></div><div style="padding:10px 14px;">';
+  for(const op of pl.opcoes){
+    const av=op.bruto*0.93;
+    const cobTags=op.ap!=='-'?'<span class="tag tag-ap">AP '+op.ap+'</span><span class="tag tag-dit">DIT '+op.dit+'</span>':'<span class="tag tag-rcp">Somente RCP</span>';
+    html+='<div class="opcao-card" id="card-'+op.cod+'" onclick="toggleCard(\''+op.cod+'\')"><div class="chk" id="chk-'+op.cod+'"></div><div class="op-cod">'+op.cod+'</div><div class="op-lmi" style="font-size:12px;color:var(--texto-sec)">'+op.lmi+'</div><div class="op-tags">'+cobTags+'</div><div class="op-precos"><div class="p-cheio">'+fmt(op.bruto)+'/ano</div><div class="p-desc">'+fmt(av)+'<span class="p-dbadge">-7% à vista</span></div><div class="p-cartao">💳 '+fmt(op.c12)+'/mês · 12x cartão</div><div class="p-boleto">Boleto 12x: '+fmt(op.b12)+'/mês</div></div></div>';
+  }
+  html+='</div></div>';
+  document.getElementById('opcoes-wrap').innerHTML=html;
+}
+
+function toggleCard(cod){
+  const card=document.getElementById('card-'+cod),chk=document.getElementById('chk-'+cod);
+  if(SEL.has(cod)){SEL.delete(cod);card.classList.remove('sel');chk.textContent='';}
+  else{SEL.add(cod);card.classList.add('sel');chk.textContent='✓';}
+}
+
+function gerarProposta(){
+  const erroEl=document.getElementById('erro');
+  erroEl.style.display='none';
+  const nome=document.getElementById('nome').value.trim();
+  const crm=document.getElementById('crm').value.trim();
+  const consultor=document.getElementById('consultor').value.trim();
+  const tel=document.getElementById('tel-consultor').value.trim();
+  const res=getVal('res');
+  const esp=document.getElementById('esp').value;
+
+  if(!nome){erroEl.textContent='Informe o nome do médico.';erroEl.style.display='block';return;}
+  if(!consultor){erroEl.textContent='Informe o consultor responsável.';erroEl.style.display='block';return;}
+  if(res==='nao'&&!esp){erroEl.textContent='Selecione a especialidade médica.';erroEl.style.display='block';return;}
+  if(SEL.size===0){erroEl.textContent='Selecione pelo menos uma opção de cobertura acima.';erroEl.style.display='block';return;}
+
+  const key=getPlanoKey(),pl=PLANOS[key];
+  const opsSel=pl.opcoes.filter(o=>SEL.has(o.cod));
+
+  let espTexto,perfilTexto;
+  if(res==='sim'){
+    const ares=getVal('ares');
+    espTexto=ares==='go'?'Residente — Ginecologia e Obstetrícia':'Residente Médico';
+    perfilTexto='Residente médico'+(ares==='go'?' — GO':'');
+  } else {
+    espTexto=ESP_LABEL[esp]||'Médico';
+    perfilTexto=esp==='gin_obs'?'Ginecologia e Obstetrícia':DIAM.has(esp)?'Realiza procedimentos cirúrgicos':'Sem procedimentos cirúrgicos';
+  }
+
+  const hoje=new Date().toLocaleDateString('pt-BR',{day:'2-digit',month:'long',year:'numeric'});
+  document.getElementById('ph-nome').textContent=nome;
+  document.getElementById('ph-crm').textContent=crm||'Não informado';
+  document.getElementById('ph-esp').textContent=espTexto;
+  document.getElementById('ph-consul').textContent=consultor;
+  document.getElementById('ph-consul2').textContent=consultor;
+  document.getElementById('ph-perfil').textContent=perfilTexto;
+  document.getElementById('ph-data').textContent=hoje;
+  document.getElementById('ph-data2').textContent=hoje;
+  document.getElementById('ph-sub').textContent='Plano '+pl.nome+' · '+pl.subtipo;
+  document.getElementById('ph-tabela').innerHTML=buildTab(opsSel,pl);
+  document.getElementById('ph-comp').innerHTML=buildComp();
+
+  // Telefone — aparece só se preenchido
+  if(tel){
+    document.getElementById('ph-tel').textContent=tel;
+    document.getElementById('li-tel').style.display='';
+  } else {
+    document.getElementById('li-tel').style.display='none';
+  }
+
+  document.getElementById('proposta').style.display='block';
+  document.getElementById('proposta').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function buildTab(ops,pl){
+  let h='<table class="pt"><thead><tr><th>Cód.</th><th>Plano</th><th>RCP (Limite)</th><th>AP</th><th>DIT</th><th>Franquia</th><th>Prêmio Anual</th><th>À Vista (−7%)</th><th>12x Cartão</th><th style="color:#ccc;font-weight:400;font-size:10px">Boleto 12x</th></tr></thead><tbody>';
+  for(const o of ops){
+    const av=o.bruto*0.93;
+    h+='<tr><td class="tc">'+o.cod+'</td><td><span class="ppill '+pl.bg+' '+pl.badge+'">'+pl.nome+'</span></td><td class="tc">'+o.lmi+'</td><td>'+o.ap+'</td><td>'+o.dit+'</td><td>Sem franquia</td><td><div class="td-cheio">'+fmt(o.bruto)+'</div></td><td><div class="td-desc">'+fmt(av)+'<span class="td-db">−7%</span></div></td><td><div class="td-cartao">'+fmt(o.c12)+'/mês</div></td><td style="opacity:.4"><div class="td-boleto">'+fmt(o.b12)+'/mês</div></td></tr>';
+  }
+  return h+'</tbody></table>';
+}
+
+function buildComp(){
+  return '<div class="cgrid">'+
+    '<div class="cbox proc"><div class="cperc">34%</div><div class="clabel">⚖️ Despesas de Processo<br/>(Honorários, Peritos, Laudos)</div></div>'+
+    '<div class="cbox acor"><div class="cperc">65%</div><div class="clabel">🤝 Acordos / Indenizações</div></div>'+
+    '<div class="cbox emer"><div class="cperc">1%</div><div class="clabel">🚨 Custas Emergenciais</div></div>'+
+  '</div>';
+}
+
+// =====================================================
+// PDF — abre janela de impressão com conteúdo isolado
+// Funciona em qualquer navegador e dispositivo
+// =====================================================
+function gerarPDF(){
+  const conteudo = document.getElementById('prop-html').innerHTML;
+  const nome = (document.getElementById('ph-nome').textContent||'proposta').replace(/\s+/g,'_');
+
+  // Copia todos os estilos da página atual
+  const estilos = Array.from(document.querySelectorAll('style'))
+    .map(s => s.outerHTML).join('');
+
+  const janela = window.open('','_blank','width=900,height=700');
+  janela.document.write(`<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<title>Proposta_RC_${nome}_BI2</title>
+${estilos}
+<style>
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; color-adjust: exact !important; }
+  body { margin: 0; padding: 0; background: #fff; }
+  @media screen { body { padding: 20px; } .print-btn { display: block; text-align: center; margin-bottom: 20px; } }
+  @media print { .print-btn { display: none !important; } }
+  .print-btn button {
+    padding: 12px 32px; background: #1a3a5c; color: #fff;
+    border: none; border-radius: 8px; font-size: 15px;
+    font-weight: 700; cursor: pointer; font-family: 'Segoe UI', Arial, sans-serif;
+  }
+  .print-btn p { font-size: 13px; color: #555; margin-top: 8px; font-family: 'Segoe UI', Arial, sans-serif; }
+</style>
+</head>
+<body>
+<div class="print-btn">
+  <button onclick="window.print()">📄 Imprimir / Salvar como PDF</button>
+  <p>Clique no botão acima → escolha "Salvar como PDF" na impressora → clique Salvar</p>
+</div>
+${conteudo}
+<script>
+  // Tenta imprimir automaticamente após carregar
+  window.onload = function(){ 
+    setTimeout(function(){ window.print(); }, 800);
+  };
+<\/script>
+</body>
+</html>`);
+  janela.document.close();
+}
+
+function novaCotacao(){
+  document.getElementById('proposta').style.display='none';
+  ['nome','crm','consultor','tel-consultor','obs'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('esp').value='';
+  document.getElementById('esp-display').value='';
+  document.getElementById('plano-tag').style.display='none';
+  setToggle('res','nao');setToggle('ares','geral');setToggle('sin','nenhum');
+  SEL.clear();
+  document.getElementById('opcoes-wrap').innerHTML='<div class="info-box info-az">👆 Selecione a especialidade acima para ver as opções disponíveis.</div>';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
