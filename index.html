@@ -185,7 +185,7 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:var(--fundo);color:var(-
 
   <div id="bloco-form">
     <div class="field"><label>Especialidade médica</label>
-      <select id="esp" onchange="onEspChange()">
+      <select id="esp">
         <option value="">Selecione a especialidade...</option>
         <optgroup label="— Ginecologia e Obstetrícia (Plano Rubi)">
           <option value="gin_obs">Ginecologia e Obstetrícia</option>
@@ -540,6 +540,24 @@ function novaCotacao(){
   document.getElementById('opcoes-wrap').innerHTML='<div class="info-box info-az">👆 Selecione a especialidade acima para ver as opções disponíveis.</div>';
   window.scrollTo({top:0,behavior:'smooth'});
 }
+
+// =====================================================
+// EVENTOS MOBILE — garante funcionamento em iOS/Android
+// =====================================================
+document.addEventListener('DOMContentLoaded', function(){
+  const sel = document.getElementById('esp');
+  // Múltiplos eventos para cobrir todos os navegadores mobile
+  ['change','input','click'].forEach(function(evt){
+    sel.addEventListener(evt, function(){
+      // Pequeno delay para iOS Safari processar o valor selecionado
+      setTimeout(onEspChange, 50);
+    });
+  });
+  // Touch específico para iOS — dispara ao soltar o dedo
+  sel.addEventListener('touchend', function(){
+    setTimeout(onEspChange, 100);
+  });
+});
 </script>
 </body>
 </html>
