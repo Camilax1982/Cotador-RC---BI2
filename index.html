@@ -160,7 +160,7 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:var(--fundo);color:var(-
   <div class="sec-label">Dados do consultor</div>
   <div class="grid2">
     <div class="field"><label>Nome do consultor responsável</label><input type="text" id="consultor" placeholder="Nome do consultor"/></div>
-    <div class="field"><label>Telefone / WhatsApp <span class="opcional">(opcional)</span></label><input type="text" id="tel-consultor" placeholder="(11) 99999-9999"/></div>
+    <div class="field"><label>Telefone / WhatsApp do médico</label><input type="text" id="tel-medico" placeholder="(11) 99999-9999"/></div>
   </div>
 
   <div class="sec-label">Perfil profissional</div>
@@ -266,6 +266,7 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:var(--fundo);color:var(-
       <div class="pst">Dados do proponente</div>
       <div class="dgrid">
         <div class="di"><span class="dk">Nome</span><span class="dv" id="ph-nome"></span></div>
+        <div class="di"><span class="dk">Telefone / WhatsApp</span><span class="dv" id="ph-tel-medico"></span></div>
         <div class="di"><span class="dk">Especialidade</span><span class="dv" id="ph-esp"></span></div>
         <div class="di"><span class="dk">CRM</span><span class="dv" id="ph-crm"></span></div>
         <div class="di"><span class="dk">Data</span><span class="dv" id="ph-data2"></span></div>
@@ -298,7 +299,6 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:var(--fundo);color:var(-
         </ul>
         <ul class="condlist" id="lista-contato">
           <li><span class="ck">Consultora</span><span class="cv" id="ph-consul2"></span></li>
-          <li id="li-tel" style="display:none"><span class="ck">WhatsApp</span><span class="cv" id="ph-tel"></span></li>
           <li><span class="ck">Parceria</span><span class="cv">BI2 · KOVR Seguradora</span></li>
         </ul>
       </div>
@@ -416,11 +416,12 @@ function gerarProposta(){
   const nome=document.getElementById('nome').value.trim();
   const crm=document.getElementById('crm').value.trim();
   const consultor=document.getElementById('consultor').value.trim();
-  const tel=document.getElementById('tel-consultor').value.trim();
+  const tel=document.getElementById('tel-medico').value.trim();
   const res=getVal('res');
   const esp=document.getElementById('esp').value;
 
   if(!nome){erroEl.textContent='Informe o nome do médico.';erroEl.style.display='block';return;}
+  if(!tel){erroEl.textContent='Informe o telefone/WhatsApp do médico.';erroEl.style.display='block';return;}
   if(!consultor){erroEl.textContent='Informe o consultor responsável.';erroEl.style.display='block';return;}
   if(res==='nao'&&!esp){erroEl.textContent='Selecione a especialidade médica.';erroEl.style.display='block';return;}
   if(SEL.size===0){erroEl.textContent='Selecione pelo menos uma opção de cobertura acima.';erroEl.style.display='block';return;}
@@ -440,6 +441,7 @@ function gerarProposta(){
 
   const hoje=new Date().toLocaleDateString('pt-BR',{day:'2-digit',month:'long',year:'numeric'});
   document.getElementById('ph-nome').textContent=nome;
+  document.getElementById('ph-tel-medico').textContent=tel;
   document.getElementById('ph-crm').textContent=crm||'Não informado';
   document.getElementById('ph-esp').textContent=espTexto;
   document.getElementById('ph-consul').textContent=consultor;
@@ -450,14 +452,6 @@ function gerarProposta(){
   document.getElementById('ph-sub').textContent='Plano '+pl.nome+' · '+pl.subtipo;
   document.getElementById('ph-tabela').innerHTML=buildTab(opsSel,pl);
   document.getElementById('ph-comp').innerHTML=buildComp();
-
-  // Telefone — aparece só se preenchido
-  if(tel){
-    document.getElementById('ph-tel').textContent=tel;
-    document.getElementById('li-tel').style.display='';
-  } else {
-    document.getElementById('li-tel').style.display='none';
-  }
 
   document.getElementById('proposta').style.display='block';
   document.getElementById('proposta').scrollIntoView({behavior:'smooth',block:'start'});
@@ -531,7 +525,7 @@ ${conteudo}
 
 function novaCotacao(){
   document.getElementById('proposta').style.display='none';
-  ['nome','crm','consultor','tel-consultor','obs'].forEach(id=>document.getElementById(id).value='');
+  ['nome','crm','consultor','tel-medico','obs'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('esp').value='';
   document.getElementById('esp-display').value='';
   document.getElementById('plano-tag').style.display='none';
