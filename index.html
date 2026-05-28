@@ -140,15 +140,12 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:var(--fundo);color:var(-
 </head>
 <body>
 <div class="wrap">
-
 <div class="sys-header">
   <div style="font-size:28px">🛡️</div>
   <div><h1>Cotador RC Médica — BI2 / KOVR</h1><p>Responsabilidade Civil Profissional · Uso interno dos consultores</p></div>
   <div class="badge-uso">🔒 Consultores</div>
 </div>
-
 <div class="form-card">
-
   <div class="sec-label">Dados do médico</div>
   <div class="grid2">
     <div class="field" style="grid-column:1/-1"><label>Nome completo do médico</label><input type="text" id="nome" placeholder="Dr. João da Silva"/></div>
@@ -156,14 +153,11 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:var(--fundo);color:var(-
     <div class="field"><label>CRM</label><input type="text" id="crm" placeholder="CRM/SP 123456"/></div>
     <div class="field" style="grid-column:1/-1"><label>Especialidade — preenchida automaticamente</label><input type="text" id="esp-display" readonly style="background:#f5f5f5;color:#888;cursor:not-allowed;" placeholder="Detectada ao selecionar abaixo"/></div>
   </div>
-
   <div class="sec-label">Dados do consultor</div>
   <div class="grid2">
     <div class="field" style="grid-column:1/-1"><label>Nome do consultor responsável</label><input type="text" id="consultor" placeholder="Nome do consultor"/></div>
   </div>
-
   <div class="sec-label">Perfil profissional</div>
-
   <div class="field" style="margin-bottom:14px">
     <label>O médico está em residência médica?</label>
     <div class="toggle-row">
@@ -171,7 +165,6 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:var(--fundo);color:var(-
       <button class="tbtn" data-grp="res" data-val="sim" onclick="setToggle('res','sim');renderOpcoes()">🎓 Sim — residente</button>
     </div>
   </div>
-
   <div id="bloco-res" style="display:none;margin-bottom:14px;">
     <div class="field"><label>Área da residência</label>
       <div class="toggle-row">
@@ -181,7 +174,6 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:var(--fundo);color:var(-
     </div>
     <div class="info-box info-am" style="margin-top:10px">ℹ️ Residentes usam o <strong>Plano Ametista</strong>. Residentes de GO têm precificação diferente (A03 e A04).</div>
   </div>
-
   <div id="bloco-form">
     <div class="field"><label>Especialidade médica</label>
       <select id="esp">
@@ -220,7 +212,6 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:var(--fundo);color:var(-
     </div>
     <div id="plano-tag" class="plano-tag"><span id="pt-pill" class="pill"></span><span id="pt-desc" class="desc"></span></div>
   </div>
-
   <div class="field" style="margin-top:14px">
     <label>Histórico de sinistros (últimos 5 anos)</label>
     <div class="toggle-row">
@@ -229,18 +220,13 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:var(--fundo);color:var(-
       <button class="tbtn" data-grp="sin" data-val="dois_mais" onclick="setToggle('sin','dois_mais')">2 ou mais</button>
     </div>
   </div>
-
   <div class="sec-label" style="margin-top:1.75rem">Coberturas para incluir na proposta</div>
   <p style="font-size:13px;color:var(--texto-sec);margin-bottom:14px;">Clique nas opções desejadas. Você pode selecionar mais de uma para apresentar alternativas ao cliente.</p>
   <div id="opcoes-wrap"><div class="info-box info-az">👆 Selecione a especialidade acima para ver as opções disponíveis.</div></div>
-
   <div class="field" style="margin-top:1.5rem"><label>Observações adicionais <span class="opcional">(opcional)</span></label><textarea id="obs" placeholder="Ex: médico recém-formado, atua em dois hospitais..."></textarea></div>
-
   <div class="erro-box" id="erro"></div>
   <button class="btn-gerar" id="btn-gerar" onclick="gerarProposta()">🧮 Gerar proposta de cotação</button>
-
 </div>
-
 <div id="proposta">
   <div class="acoes">
     <button class="btn-a" onclick="novaCotacao()">🔄 Nova cotação</button>
@@ -313,11 +299,10 @@ function gerarProposta(){const erroEl=document.getElementById('erro');erroEl.sty
 function buildTab(ops,pl){let h='<table class="pt"><thead><tr><th>Cód.</th><th>Plano</th><th>RCP (Limite)</th><th>AP</th><th>DIT</th><th>Franquia</th><th>Prêmio Anual</th><th>À Vista (−7%)</th><th>12x Cartão</th><th style="color:#ccc;font-weight:400;font-size:10px">Boleto 12x</th></tr></thead><tbody>';for(const o of ops){const av=o.bruto*0.93;h+='<tr><td class="tc">'+o.cod+'</td><td><span class="ppill '+pl.bg+' '+pl.badge+'">'+pl.nome+'</span></td><td class="tc">'+o.lmi+'</td><td>'+o.ap+'</td><td>'+o.dit+'</td><td>Sem franquia</td><td><div class="td-cheio">'+fmt(o.bruto)+'</div></td><td><div class="td-desc">'+fmt(av)+'<span class="td-db">−7%</span></div></td><td><div class="td-cartao">'+fmt(o.c12)+'/mês</div></td><td style="opacity:.4"><div class="td-boleto">'+fmt(o.b12)+'/mês</div></td></tr>';}return h+'</tbody></table>';}
 function buildComp(){return '<div class="cgrid"><div class="cbox proc"><div class="cperc">34%</div><div class="clabel">⚖️ Despesas de Processo<br/>(Honorários, Peritos, Laudos)</div></div><div class="cbox acor"><div class="cperc">65%</div><div class="clabel">🤝 Acordos / Indenizações</div></div><div class="cbox emer"><div class="cperc">1%</div><div class="clabel">🚨 Custas Emergenciais</div></div></div>';}
 function gerarPDF(){const conteudo=document.getElementById('prop-html').innerHTML;const nome=(document.getElementById('ph-nome').textContent||'proposta').replace(/\s+/g,'_');const estilos=Array.from(document.querySelectorAll('style')).map(s=>s.outerHTML).join('');const janela=window.open('','_blank','width=900,height=700');janela.document.write('<!DOCTYPE html>\n<html lang="pt-BR">\n<head>\n<meta charset="UTF-8"/>\n<title>Proposta_RC_'+nome+'_BI2</title>\n'+estilos+'\n<style>\n  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; color-adjust: exact !important; }\n  body { margin: 0; padding: 0; background: #fff; }\n  @media screen { body { padding: 20px; } .print-btn { display: block; text-align: center; margin-bottom: 20px; } }\n  @media print { .print-btn { display: none !important; } }\n  .print-btn button { padding: 12px 32px; background: #1a3a5c; color: #fff; border: none; border-radius: 8px; font-size: 15px; font-weight: 700; cursor: pointer; }\n  .print-btn p { font-size: 13px; color: #555; margin-top: 8px; }\n</style>\n</head>\n<body>\n<div class="print-btn">\n  <button onclick="window.print()">📄 Imprimir / Salvar como PDF</button>\n  <p>Clique no botão acima → escolha "Salvar como PDF" → clique Salvar</p>\n</div>\n'+conteudo+'\n<script>window.onload=function(){setTimeout(function(){window.print();},800);};<\/script>\n</body>\n</html>');janela.document.close();}
-var URL_CRM="https://script.https://script.google.com/macros/s/AKfycby_WWj2DCG7Mr-KzQQQjgo3wdJTHn5c566d4_7TO_LEbUsfwy1Li_F1K78KlC2KvDlD/execgoogle.com/macros/s/AKfycby_WWj2DCG7Mr-KzQQQjgo3wdJTHn5c566d4_7TO_LEbUsfwy1Li_F1K78KlC2KvDlD/exec";
+var URL_CRM="https://script.google.com/macros/s/AKfycby_WWj2DCG7Mr-KzQQQjgo3wdJTHn5c566d4_7TO_LEbUsfwy1Li_F1K78KlC2KvDlD/exec";
 function enviarParaCRM(dadosCotacao){fetch(URL_CRM,{method:"POST",mode:"no-cors",headers:{"Content-Type":"application/json"},body:JSON.stringify(dadosCotacao)}).then(function(){console.log("Lead enviado ao CRM com sucesso.");}).catch(function(err){console.log("Erro ao enviar ao CRM:",err);});}
 function novaCotacao(){document.getElementById('proposta').style.display='none';['nome','crm','consultor','tel-medico','obs'].forEach(id=>document.getElementById(id).value='');document.getElementById('esp').value='';document.getElementById('esp-display').value='';document.getElementById('plano-tag').style.display='none';setToggle('res','nao');setToggle('ares','geral');setToggle('sin','nenhum');SEL.clear();document.getElementById('opcoes-wrap').innerHTML='<div class="info-box info-az">👆 Selecione a especialidade acima para ver as opções disponíveis.</div>';window.scrollTo({top:0,behavior:'smooth'});}
 document.addEventListener('DOMContentLoaded',function(){const sel=document.getElementById('esp');['change','input','click'].forEach(function(evt){sel.addEventListener(evt,function(){setTimeout(onEspChange,50);});});sel.addEventListener('touchend',function(){setTimeout(onEspChange,100);});});
 </script>
 </body>
 </html>
-
