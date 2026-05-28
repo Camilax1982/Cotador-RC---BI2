@@ -72,7 +72,6 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:var(--fundo);color:var(-
 .btn-a:hover{background:var(--azul-claro);border-color:var(--azul-medio);}
 .btn-a.prim{background:var(--azul);color:#fff;border-color:var(--azul);}
 .btn-a.prim:hover{background:var(--azul-medio);}
-/* === PROPOSTA IMPRESSA === */
 #prop-html{font-family:'Segoe UI',Arial,sans-serif;}
 .ph-bar{background:#1a3a5c;padding:18px 28px;display:flex;align-items:center;justify-content:space-between;}
 .logo-bi2{background:#fff;border-radius:6px;padding:5px 12px;font-weight:900;font-size:18px;color:#1a3a5c;letter-spacing:-1px;line-height:1.2;}
@@ -153,14 +152,14 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:var(--fundo);color:var(-
   <div class="sec-label">Dados do médico</div>
   <div class="grid2">
     <div class="field" style="grid-column:1/-1"><label>Nome completo do médico</label><input type="text" id="nome" placeholder="Dr. João da Silva"/></div>
+    <div class="field"><label>Telefone / WhatsApp do médico</label><input type="text" id="tel-medico" placeholder="(11) 99999-9999"/></div>
     <div class="field"><label>CRM</label><input type="text" id="crm" placeholder="CRM/SP 123456"/></div>
-    <div class="field"><label>Especialidade — preenchida automaticamente</label><input type="text" id="esp-display" readonly style="background:#f5f5f5;color:#888;cursor:not-allowed;" placeholder="Detectada ao selecionar abaixo"/></div>
+    <div class="field" style="grid-column:1/-1"><label>Especialidade — preenchida automaticamente</label><input type="text" id="esp-display" readonly style="background:#f5f5f5;color:#888;cursor:not-allowed;" placeholder="Detectada ao selecionar abaixo"/></div>
   </div>
 
   <div class="sec-label">Dados do consultor</div>
   <div class="grid2">
-    <div class="field"><label>Nome do consultor responsável</label><input type="text" id="consultor" placeholder="Nome do consultor"/></div>
-    <div class="field"><label>Telefone / WhatsApp do médico</label><input type="text" id="tel-medico" placeholder="(11) 99999-9999"/></div>
+    <div class="field" style="grid-column:1/-1"><label>Nome do consultor responsável</label><input type="text" id="consultor" placeholder="Nome do consultor"/></div>
   </div>
 
   <div class="sec-label">Perfil profissional</div>
@@ -242,7 +241,6 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:var(--fundo);color:var(-
 
 </div>
 
-<!-- PROPOSTA -->
 <div id="proposta">
   <div class="acoes">
     <button class="btn-a" onclick="novaCotacao()">🔄 Nova cotação</button>
@@ -262,7 +260,6 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:var(--fundo);color:var(-
       <p id="ph-sub"></p>
     </div>
     <div class="pbody">
-
       <div class="pst">Dados do proponente</div>
       <div class="dgrid">
         <div class="di"><span class="dk">Nome</span><span class="dv" id="ph-nome"></span></div>
@@ -273,20 +270,12 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:var(--fundo);color:var(-
         <div class="di"><span class="dk">Consultora</span><span class="dv" id="ph-consul"></span></div>
         <div class="di"><span class="dk">Perfil</span><span class="dv" id="ph-perfil"></span></div>
       </div>
-
       <div class="pst" style="margin-top:20px">Opções de cobertura e preços</div>
       <div id="ph-tabela"></div>
-      <p style="font-size:11px;color:#888;margin-top:8px;line-height:1.5;">
-        * <strong>À vista:</strong> desconto de 7% sobre o prêmio anual. &nbsp;
-        <strong>Boleto parcelado:</strong> disponível conforme condições da Estipulante BI2. &nbsp;
-        RCP = Responsabilidade Civil Profissional | AP = Acidente Pessoal | DIT = Diária por Incapacidade Temporária. &nbsp;
-        Valores ilustrativos, sujeitos a alteração.
-      </p>
-
+      <p style="font-size:11px;color:#888;margin-top:8px;line-height:1.5;">* <strong>À vista:</strong> desconto de 7% sobre o prêmio anual. &nbsp;<strong>Boleto parcelado:</strong> disponível conforme condições da Estipulante BI2. &nbsp;RCP = Responsabilidade Civil Profissional | AP = Acidente Pessoal | DIT = Diária por Incapacidade Temporária. &nbsp;Valores ilustrativos, sujeitos a alteração.</p>
       <div class="pst" style="margin-top:20px">Composição das coberturas — destinação do limite RCP</div>
       <div id="ph-comp"></div>
       <p style="font-size:10px;color:#999;margin-top:10px;font-style:italic;line-height:1.5;">* A separação proporcional do capital por destinação é uma exigência regulatória estabelecida pelo Marco Legal do Seguro, regulamentado pela SUSEP em dezembro de 2025, garantindo ao segurado transparência na utilização dos recursos da apólice.</p>
-
       <div class="pst" style="margin-top:20px">Condições gerais e contato</div>
       <div class="condgrid">
         <ul class="condlist">
@@ -304,254 +293,30 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:var(--fundo);color:var(-
       </div>
       <p style="font-size:11px;color:#888;margin-top:12px;font-style:italic;">Proposta válida por 30 dias. Sujeita à análise cadastral e aceitação da seguradora. Valores meramente ilustrativos, podendo sofrer alterações a qualquer momento.</p>
     </div>
-    <div class="pfooter">
-      <strong>Brazilian Insurance Institute – BI2 | KOVR Seguradora</strong>
-    </div>
+    <div class="pfooter"><strong>Brazilian Insurance Institute – BI2 | KOVR Seguradora</strong></div>
   </div>
 </div>
-
-</div><!-- /wrap -->
-
+</div>
 <script>
 const SEL=new Set();
 const DIAM=new Set(['cirurgia_geral','anestesiologia','ortopedia','neurocirurgia','urologia_cir','oftalmologia_cir','gastro_cir','cardio_int','outros_cir','outras_cir_geral']);
 const ESP_LABEL={gin_obs:'Ginecologista Obstetra',cirurgia_geral:'Cirurgião Geral',anestesiologia:'Anestesiologista',ortopedia:'Ortopedista e Traumatologista',neurocirurgia:'Neurocirurgião',urologia_cir:'Urologista (cirúrgico)',oftalmologia_cir:'Oftalmologista (cirurgias)',gastro_cir:'Gastroenterologista (procedimentos)',cardio_int:'Cardiologista Intervencionista',outros_cir:'Cirurgião',outras_cir_geral:'Médico (com procedimentos cirúrgicos)',clinica_medica:'Clínico Geral',dermatologia:'Dermatologista',pediatria:'Pediatra',psiquiatria:'Psiquiatra',radiologia:'Radiologista',oncologia:'Oncologista Clínico',endocrinologia:'Endocrinologista',reumatologia:'Reumatologista',pneumologia:'Pneumologista',neurologia:'Neurologista Clínico',geriatria:'Geriatra',cardiologia_clin:'Cardiologista Clínico',outra_sem_cir:'Médico'};
-
-const PLANOS={
-  ametista_geral:{nome:'Ametista',badge:'pa',bg:'bga',subtipo:'Residente Médico (exceto GO) — Retroatividade 5 anos',opcoes:[
-    {cod:'A01',lmi:'R$ 250.000',lv:250000,ap:'-',dit:'-',bruto:2294.96,c12:191.29,b12:196.07},
-    {cod:'A02',lmi:'R$ 500.000',lv:500000,ap:'-',dit:'-',bruto:3659.52,c12:305.03,b12:312.66}]},
-  ametista_go:{nome:'Ametista GO',badge:'pa',bg:'bga',subtipo:'Residente — Ginecologia e Obstetrícia — Retroatividade 5 anos',opcoes:[
-    {cod:'A03',lmi:'R$ 250.000',lv:250000,ap:'-',dit:'-',bruto:2667.11,c12:222.31,b12:227.87},
-    {cod:'A04',lmi:'R$ 500.000',lv:500000,ap:'-',dit:'-',bruto:4403.83,c12:367.07,b12:376.25}]},
-  esmeralda:{nome:'Esmeralda',badge:'pe',bg:'bge',subtipo:'Sem Procedimentos Cirúrgicos — Retroatividade 5 anos',opcoes:[
-    {cod:'E01',lmi:'R$ 250.000',lv:250000,ap:'-',dit:'-',bruto:1942.87,c12:161.94,b12:165.99},
-    {cod:'E02',lmi:'R$ 250.000',lv:250000,ap:'100 mil',dit:'9 mil',bruto:7151.32,c12:581.94,b12:596.49},
-    {cod:'E03',lmi:'R$ 250.000',lv:250000,ap:'200 mil',dit:'18 mil',bruto:8806.45,c12:716.63,b12:734.54},
-    {cod:'E04',lmi:'R$ 500.000',lv:500000,ap:'-',dit:'-',bruto:3028.32,c12:252.42,b12:258.73},
-    {cod:'E05',lmi:'R$ 500.000',lv:500000,ap:'100 mil',dit:'9 mil',bruto:8237.85,c12:670.27,b12:687.02},
-    {cod:'E06',lmi:'R$ 500.000',lv:500000,ap:'200 mil',dit:'18 mil',bruto:9440.86,c12:768.25,b12:787.46}]},
-  diamante:{nome:'Diamante',badge:'pd',bg:'bgd',subtipo:'Com Procedimentos Cirúrgicos — Retroatividade 5 anos',opcoes:[
-    {cod:'D01',lmi:'R$ 250.000',lv:250000,ap:'-',dit:'-',bruto:3193.55,c12:259.88,b12:266.37},
-    {cod:'D02',lmi:'R$ 250.000',lv:250000,ap:'100 mil',dit:'9 mil',bruto:8150.54,c12:663.25,b12:679.83},
-    {cod:'D03',lmi:'R$ 250.000',lv:250000,ap:'200 mil',dit:'18 mil',bruto:9440.86,c12:768.25,b12:787.46},
-    {cod:'D04',lmi:'R$ 500.000',lv:500000,ap:'-',dit:'-',bruto:5209.10,c12:434.28,b12:445.14},
-    {cod:'D05',lmi:'R$ 500.000',lv:500000,ap:'100 mil',dit:'9 mil',bruto:10418.62,c12:847.82,b12:869.01},
-    {cod:'D06',lmi:'R$ 500.000',lv:500000,ap:'200 mil',dit:'18 mil',bruto:11644.43,c12:947.57,b12:971.26},
-    {cod:'D07',lmi:'R$ 1.000.000',lv:1000000,ap:'-',dit:'-',bruto:7075.27,c12:592.57,b12:607.61},
-    {cod:'D08',lmi:'R$ 1.000.000',lv:1000000,ap:'100 mil',dit:'9 mil',bruto:12408.60,c12:1009.75,b12:1034.99},
-    {cod:'D09',lmi:'R$ 1.000.000',lv:1000000,ap:'200 mil',dit:'18 mil',bruto:13634.41,c12:1109.50,b12:1137.24}]},
-  rubi:{nome:'Rubi',badge:'pr',bg:'bgr',subtipo:'Ginecologia e Obstetrícia — Retroatividade 5 anos',opcoes:[
-    {cod:'R01',lmi:'R$ 250.000',lv:250000,ap:'-',dit:'-',bruto:4182.80,c12:340.38,b12:348.88},
-    {cod:'R02',lmi:'R$ 250.000',lv:250000,ap:'100 mil',dit:'9 mil',bruto:9188.17,c12:747.69,b12:766.38},
-    {cod:'R03',lmi:'R$ 250.000',lv:250000,ap:'200 mil',dit:'18 mil',bruto:10623.66,c12:864.50,b12:886.11},
-    {cod:'R04',lmi:'R$ 500.000',lv:500000,ap:'-',dit:'-',bruto:6439.78,c12:522.94,b12:536.01},
-    {cod:'R05',lmi:'R$ 500.000',lv:500000,ap:'100 mil',dit:'9 mil',bruto:11493.55,c12:935.29,b12:958.67},
-    {cod:'R06',lmi:'R$ 500.000',lv:500000,ap:'200 mil',dit:'18 mil',bruto:12989.25,c12:1057.00,b12:1083.43},
-    {cod:'R07',lmi:'R$ 1.000.000',lv:1000000,ap:'-',dit:'-',bruto:9122.58,c12:754.69,b12:773.56},
-    {cod:'R08',lmi:'R$ 1.000.000',lv:1000000,ap:'100 mil',dit:'9 mil',bruto:14247.31,c12:1159.38,b12:1188.36},
-    {cod:'R09',lmi:'R$ 1.000.000',lv:1000000,ap:'200 mil',dit:'18 mil',bruto:16116.13,c12:1311.54,b12:1344.33}]}
-};
-
+const PLANOS={ametista_geral:{nome:'Ametista',badge:'pa',bg:'bga',subtipo:'Residente Médico (exceto GO) — Retroatividade 5 anos',opcoes:[{cod:'A01',lmi:'R$ 250.000',lv:250000,ap:'-',dit:'-',bruto:2294.96,c12:191.29,b12:196.07},{cod:'A02',lmi:'R$ 500.000',lv:500000,ap:'-',dit:'-',bruto:3659.52,c12:305.03,b12:312.66}]},ametista_go:{nome:'Ametista GO',badge:'pa',bg:'bga',subtipo:'Residente — Ginecologia e Obstetrícia — Retroatividade 5 anos',opcoes:[{cod:'A03',lmi:'R$ 250.000',lv:250000,ap:'-',dit:'-',bruto:2667.11,c12:222.31,b12:227.87},{cod:'A04',lmi:'R$ 500.000',lv:500000,ap:'-',dit:'-',bruto:4403.83,c12:367.07,b12:376.25}]},esmeralda:{nome:'Esmeralda',badge:'pe',bg:'bge',subtipo:'Sem Procedimentos Cirúrgicos — Retroatividade 5 anos',opcoes:[{cod:'E01',lmi:'R$ 250.000',lv:250000,ap:'-',dit:'-',bruto:1942.87,c12:161.94,b12:165.99},{cod:'E02',lmi:'R$ 250.000',lv:250000,ap:'100 mil',dit:'9 mil',bruto:7151.32,c12:581.94,b12:596.49},{cod:'E03',lmi:'R$ 250.000',lv:250000,ap:'200 mil',dit:'18 mil',bruto:8806.45,c12:716.63,b12:734.54},{cod:'E04',lmi:'R$ 500.000',lv:500000,ap:'-',dit:'-',bruto:3028.32,c12:252.42,b12:258.73},{cod:'E05',lmi:'R$ 500.000',lv:500000,ap:'100 mil',dit:'9 mil',bruto:8237.85,c12:670.27,b12:687.02},{cod:'E06',lmi:'R$ 500.000',lv:500000,ap:'200 mil',dit:'18 mil',bruto:9440.86,c12:768.25,b12:787.46}]},diamante:{nome:'Diamante',badge:'pd',bg:'bgd',subtipo:'Com Procedimentos Cirúrgicos — Retroatividade 5 anos',opcoes:[{cod:'D01',lmi:'R$ 250.000',lv:250000,ap:'-',dit:'-',bruto:3193.55,c12:259.88,b12:266.37},{cod:'D02',lmi:'R$ 250.000',lv:250000,ap:'100 mil',dit:'9 mil',bruto:8150.54,c12:663.25,b12:679.83},{cod:'D03',lmi:'R$ 250.000',lv:250000,ap:'200 mil',dit:'18 mil',bruto:9440.86,c12:768.25,b12:787.46},{cod:'D04',lmi:'R$ 500.000',lv:500000,ap:'-',dit:'-',bruto:5209.10,c12:434.28,b12:445.14},{cod:'D05',lmi:'R$ 500.000',lv:500000,ap:'100 mil',dit:'9 mil',bruto:10418.62,c12:847.82,b12:869.01},{cod:'D06',lmi:'R$ 500.000',lv:500000,ap:'200 mil',dit:'18 mil',bruto:11644.43,c12:947.57,b12:971.26},{cod:'D07',lmi:'R$ 1.000.000',lv:1000000,ap:'-',dit:'-',bruto:7075.27,c12:592.57,b12:607.61},{cod:'D08',lmi:'R$ 1.000.000',lv:1000000,ap:'100 mil',dit:'9 mil',bruto:12408.60,c12:1009.75,b12:1034.99},{cod:'D09',lmi:'R$ 1.000.000',lv:1000000,ap:'200 mil',dit:'18 mil',bruto:13634.41,c12:1109.50,b12:1137.24}]},rubi:{nome:'Rubi',badge:'pr',bg:'bgr',subtipo:'Ginecologia e Obstetrícia — Retroatividade 5 anos',opcoes:[{cod:'R01',lmi:'R$ 250.000',lv:250000,ap:'-',dit:'-',bruto:4182.80,c12:340.38,b12:348.88},{cod:'R02',lmi:'R$ 250.000',lv:250000,ap:'100 mil',dit:'9 mil',bruto:9188.17,c12:747.69,b12:766.38},{cod:'R03',lmi:'R$ 250.000',lv:250000,ap:'200 mil',dit:'18 mil',bruto:10623.66,c12:864.50,b12:886.11},{cod:'R04',lmi:'R$ 500.000',lv:500000,ap:'-',dit:'-',bruto:6439.78,c12:522.94,b12:536.01},{cod:'R05',lmi:'R$ 500.000',lv:500000,ap:'100 mil',dit:'9 mil',bruto:11493.55,c12:935.29,b12:958.67},{cod:'R06',lmi:'R$ 500.000',lv:500000,ap:'200 mil',dit:'18 mil',bruto:12989.25,c12:1057.00,b12:1083.43},{cod:'R07',lmi:'R$ 1.000.000',lv:1000000,ap:'-',dit:'-',bruto:9122.58,c12:754.69,b12:773.56},{cod:'R08',lmi:'R$ 1.000.000',lv:1000000,ap:'100 mil',dit:'9 mil',bruto:14247.31,c12:1159.38,b12:1188.36},{cod:'R09',lmi:'R$ 1.000.000',lv:1000000,ap:'200 mil',dit:'18 mil',bruto:16116.13,c12:1311.54,b12:1344.33}]}};
 function fmt(v){return v.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});}
 function getVal(g){const e=document.querySelector('.tbtn.on[data-grp="'+g+'"]');return e?e.dataset.val:'';}
-
-function setToggle(g,v){
-  document.querySelectorAll('.tbtn[data-grp="'+g+'"]').forEach(b=>b.classList.toggle('on',b.dataset.val===v));
-  if(g==='res'){
-    document.getElementById('bloco-res').style.display=v==='sim'?'block':'none';
-    document.getElementById('bloco-form').style.display=v==='nao'?'block':'none';
-  }
-}
-
-function getPlanoKey(){
-  const res=getVal('res'),ares=getVal('ares');
-  if(res==='sim') return ares==='go'?'ametista_go':'ametista_geral';
-  const esp=document.getElementById('esp').value;
-  if(esp==='gin_obs') return 'rubi';
-  if(DIAM.has(esp)) return 'diamante';
-  return 'esmeralda';
-}
-
-function onEspChange(){
-  const esp=document.getElementById('esp').value;
-  const tag=document.getElementById('plano-tag');
-  document.getElementById('esp-display').value=esp?ESP_LABEL[esp]||'':'';
-  if(!esp){tag.style.display='none';renderOpcoes();return;}
-  const key=getPlanoKey(),pl=PLANOS[key];
-  document.getElementById('pt-pill').textContent=pl.nome;
-  document.getElementById('pt-pill').className='pill '+pl.bg+' '+pl.badge;
-  document.getElementById('pt-desc').textContent=pl.subtipo;
-  tag.style.display='flex';
-  renderOpcoes();
-}
-
-function renderOpcoes(){
-  SEL.clear();
-  const res=getVal('res');
-  if(res==='nao'&&!document.getElementById('esp').value){
-    document.getElementById('opcoes-wrap').innerHTML='<div class="info-box info-az">👆 Selecione a especialidade acima para ver as opções disponíveis.</div>';
-    return;
-  }
-  const key=getPlanoKey(),pl=PLANOS[key];
-  let html='<div style="border:1px solid var(--borda);border-radius:10px;overflow:hidden;"><div style="padding:10px 14px;background:var(--azul);color:#fff;display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span class="ppill '+pl.bg+' '+pl.badge+'">'+pl.nome+'</span><span style="font-size:12px;opacity:.85">'+pl.subtipo+'</span></div><div style="padding:10px 14px;">';
-  for(const op of pl.opcoes){
-    const av=op.bruto*0.93;
-    const cobTags=op.ap!=='-'?'<span class="tag tag-ap">AP '+op.ap+'</span><span class="tag tag-dit">DIT '+op.dit+'</span>':'<span class="tag tag-rcp">Somente RCP</span>';
-    html+='<div class="opcao-card" id="card-'+op.cod+'" onclick="toggleCard(\''+op.cod+'\')"><div class="chk" id="chk-'+op.cod+'"></div><div class="op-cod">'+op.cod+'</div><div class="op-lmi" style="font-size:12px;color:var(--texto-sec)">'+op.lmi+'</div><div class="op-tags">'+cobTags+'</div><div class="op-precos"><div class="p-cheio">'+fmt(op.bruto)+'/ano</div><div class="p-desc">'+fmt(av)+'<span class="p-dbadge">-7% à vista</span></div><div class="p-cartao">💳 '+fmt(op.c12)+'/mês · 12x cartão</div><div class="p-boleto">Boleto 12x: '+fmt(op.b12)+'/mês</div></div></div>';
-  }
-  html+='</div></div>';
-  document.getElementById('opcoes-wrap').innerHTML=html;
-}
-
-function toggleCard(cod){
-  const card=document.getElementById('card-'+cod),chk=document.getElementById('chk-'+cod);
-  if(SEL.has(cod)){SEL.delete(cod);card.classList.remove('sel');chk.textContent='';}
-  else{SEL.add(cod);card.classList.add('sel');chk.textContent='✓';}
-}
-
-function gerarProposta(){
-  const erroEl=document.getElementById('erro');
-  erroEl.style.display='none';
-  const nome=document.getElementById('nome').value.trim();
-  const crm=document.getElementById('crm').value.trim();
-  const consultor=document.getElementById('consultor').value.trim();
-  const tel=document.getElementById('tel-medico').value.trim();
-  const res=getVal('res');
-  const esp=document.getElementById('esp').value;
-
-  if(!nome){erroEl.textContent='Informe o nome do médico.';erroEl.style.display='block';return;}
-  if(!tel){erroEl.textContent='Informe o telefone/WhatsApp do médico.';erroEl.style.display='block';return;}
-  if(!consultor){erroEl.textContent='Informe o consultor responsável.';erroEl.style.display='block';return;}
-  if(res==='nao'&&!esp){erroEl.textContent='Selecione a especialidade médica.';erroEl.style.display='block';return;}
-  if(SEL.size===0){erroEl.textContent='Selecione pelo menos uma opção de cobertura acima.';erroEl.style.display='block';return;}
-
-  const key=getPlanoKey(),pl=PLANOS[key];
-  const opsSel=pl.opcoes.filter(o=>SEL.has(o.cod));
-
-  let espTexto,perfilTexto;
-  if(res==='sim'){
-    const ares=getVal('ares');
-    espTexto=ares==='go'?'Residente — Ginecologia e Obstetrícia':'Residente Médico';
-    perfilTexto='Residente médico'+(ares==='go'?' — GO':'');
-  } else {
-    espTexto=ESP_LABEL[esp]||'Médico';
-    perfilTexto=esp==='gin_obs'?'Ginecologia e Obstetrícia':DIAM.has(esp)?'Realiza procedimentos cirúrgicos':'Sem procedimentos cirúrgicos';
-  }
-
-  const hoje=new Date().toLocaleDateString('pt-BR',{day:'2-digit',month:'long',year:'numeric'});
-  document.getElementById('ph-nome').textContent=nome;
-  document.getElementById('ph-tel-medico').textContent=tel;
-  document.getElementById('ph-crm').textContent=crm||'Não informado';
-  document.getElementById('ph-esp').textContent=espTexto;
-  document.getElementById('ph-consul').textContent=consultor;
-  document.getElementById('ph-consul2').textContent=consultor;
-  document.getElementById('ph-perfil').textContent=perfilTexto;
-  document.getElementById('ph-data').textContent=hoje;
-  document.getElementById('ph-data2').textContent=hoje;
-  document.getElementById('ph-sub').textContent='Plano '+pl.nome+' · '+pl.subtipo;
-  document.getElementById('ph-tabela').innerHTML=buildTab(opsSel,pl);
-  document.getElementById('ph-comp').innerHTML=buildComp();
-
-  document.getElementById('proposta').style.display='block';
-  document.getElementById('proposta').scrollIntoView({behavior:'smooth',block:'start'});
-}
-
-function buildTab(ops,pl){
-  let h='<table class="pt"><thead><tr><th>Cód.</th><th>Plano</th><th>RCP (Limite)</th><th>AP</th><th>DIT</th><th>Franquia</th><th>Prêmio Anual</th><th>À Vista (−7%)</th><th>12x Cartão</th><th style="color:#ccc;font-weight:400;font-size:10px">Boleto 12x</th></tr></thead><tbody>';
-  for(const o of ops){
-    const av=o.bruto*0.93;
-    h+='<tr><td class="tc">'+o.cod+'</td><td><span class="ppill '+pl.bg+' '+pl.badge+'">'+pl.nome+'</span></td><td class="tc">'+o.lmi+'</td><td>'+o.ap+'</td><td>'+o.dit+'</td><td>Sem franquia</td><td><div class="td-cheio">'+fmt(o.bruto)+'</div></td><td><div class="td-desc">'+fmt(av)+'<span class="td-db">−7%</span></div></td><td><div class="td-cartao">'+fmt(o.c12)+'/mês</div></td><td style="opacity:.4"><div class="td-boleto">'+fmt(o.b12)+'/mês</div></td></tr>';
-  }
-  return h+'</tbody></table>';
-}
-
-function buildComp(){
-  return '<div class="cgrid">'+
-    '<div class="cbox proc"><div class="cperc">34%</div><div class="clabel">⚖️ Despesas de Processo<br/>(Honorários, Peritos, Laudos)</div></div>'+
-    '<div class="cbox acor"><div class="cperc">65%</div><div class="clabel">🤝 Acordos / Indenizações</div></div>'+
-    '<div class="cbox emer"><div class="cperc">1%</div><div class="clabel">🚨 Custas Emergenciais</div></div>'+
-  '</div>';
-}
-
-// =====================================================
-// PDF — abre janela de impressão com conteúdo isolado
-// Funciona em qualquer navegador e dispositivo
-// =====================================================
-function gerarPDF(){
-  const conteudo = document.getElementById('prop-html').innerHTML;
-  const nome = (document.getElementById('ph-nome').textContent||'proposta').replace(/\s+/g,'_');
-
-  // Copia todos os estilos da página atual
-  const estilos = Array.from(document.querySelectorAll('style'))
-    .map(s => s.outerHTML).join('');
-
-  const janela = window.open('','_blank','width=900,height=700');
-  janela.document.write(`<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8"/>
-<title>Proposta_RC_${nome}_BI2</title>
-${estilos}
-<style>
-  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; color-adjust: exact !important; }
-  body { margin: 0; padding: 0; background: #fff; }
-  @media screen { body { padding: 20px; } .print-btn { display: block; text-align: center; margin-bottom: 20px; } }
-  @media print { .print-btn { display: none !important; } }
-  .print-btn button {
-    padding: 12px 32px; background: #1a3a5c; color: #fff;
-    border: none; border-radius: 8px; font-size: 15px;
-    font-weight: 700; cursor: pointer; font-family: 'Segoe UI', Arial, sans-serif;
-  }
-  .print-btn p { font-size: 13px; color: #555; margin-top: 8px; font-family: 'Segoe UI', Arial, sans-serif; }
-</style>
-</head>
-<body>
-<div class="print-btn">
-  <button onclick="window.print()">📄 Imprimir / Salvar como PDF</button>
-  <p>Clique no botão acima → escolha "Salvar como PDF" na impressora → clique Salvar</p>
-</div>
-${conteudo}
-<script>
-  // Tenta imprimir automaticamente após carregar
-  window.onload = function(){ 
-    setTimeout(function(){ window.print(); }, 800);
-  };
-<\/script>
-</body>
-</html>`);
-  janela.document.close();
-}
-
-function novaCotacao(){
-  document.getElementById('proposta').style.display='none';
-  ['nome','crm','consultor','tel-medico','obs'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('esp').value='';
-  document.getElementById('esp-display').value='';
-  document.getElementById('plano-tag').style.display='none';
-  setToggle('res','nao');setToggle('ares','geral');setToggle('sin','nenhum');
-  SEL.clear();
-  document.getElementById('opcoes-wrap').innerHTML='<div class="info-box info-az">👆 Selecione a especialidade acima para ver as opções disponíveis.</div>';
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-
-// =====================================================
-// EVENTOS MOBILE — garante funcionamento em iOS/Android
-// =====================================================
-document.addEventListener('DOMContentLoaded', function(){
-  const sel = document.getElementById('esp');
-  // Múltiplos eventos para cobrir todos os navegadores mobile
-  ['change','input','click'].forEach(function(evt){
-    sel.addEventListener(evt, function(){
-      // Pequeno delay para iOS Safari processar o valor selecionado
-      setTimeout(onEspChange, 50);
-    });
-  });
-  // Touch específico para iOS — dispara ao soltar o dedo
-  sel.addEventListener('touchend', function(){
-    setTimeout(onEspChange, 100);
-  });
-});
+function setToggle(g,v){document.querySelectorAll('.tbtn[data-grp="'+g+'"]').forEach(b=>b.classList.toggle('on',b.dataset.val===v));if(g==='res'){document.getElementById('bloco-res').style.display=v==='sim'?'block':'none';document.getElementById('bloco-form').style.display=v==='nao'?'block':'none';}}
+function getPlanoKey(){const res=getVal('res'),ares=getVal('ares');if(res==='sim') return ares==='go'?'ametista_go':'ametista_geral';const esp=document.getElementById('esp').value;if(esp==='gin_obs') return 'rubi';if(DIAM.has(esp)) return 'diamante';return 'esmeralda';}
+function onEspChange(){const esp=document.getElementById('esp').value;const tag=document.getElementById('plano-tag');document.getElementById('esp-display').value=esp?ESP_LABEL[esp]||'':'';if(!esp){tag.style.display='none';renderOpcoes();return;}const key=getPlanoKey(),pl=PLANOS[key];document.getElementById('pt-pill').textContent=pl.nome;document.getElementById('pt-pill').className='pill '+pl.bg+' '+pl.badge;document.getElementById('pt-desc').textContent=pl.subtipo;tag.style.display='flex';renderOpcoes();}
+function renderOpcoes(){SEL.clear();const res=getVal('res');if(res==='nao'&&!document.getElementById('esp').value){document.getElementById('opcoes-wrap').innerHTML='<div class="info-box info-az">👆 Selecione a especialidade acima para ver as opções disponíveis.</div>';return;}const key=getPlanoKey(),pl=PLANOS[key];let html='<div style="border:1px solid var(--borda);border-radius:10px;overflow:hidden;"><div style="padding:10px 14px;background:var(--azul);color:#fff;display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span class="ppill '+pl.bg+' '+pl.badge+'">'+pl.nome+'</span><span style="font-size:12px;opacity:.85">'+pl.subtipo+'</span></div><div style="padding:10px 14px;">';for(const op of pl.opcoes){const av=op.bruto*0.93;const cobTags=op.ap!=='-'?'<span class="tag tag-ap">AP '+op.ap+'</span><span class="tag tag-dit">DIT '+op.dit+'</span>':'<span class="tag tag-rcp">Somente RCP</span>';html+='<div class="opcao-card" id="card-'+op.cod+'" onclick="toggleCard(\''+op.cod+'\')" ><div class="chk" id="chk-'+op.cod+'"></div><div class="op-cod">'+op.cod+'</div><div class="op-lmi" style="font-size:12px;color:var(--texto-sec)">'+op.lmi+'</div><div class="op-tags">'+cobTags+'</div><div class="op-precos"><div class="p-cheio">'+fmt(op.bruto)+'/ano</div><div class="p-desc">'+fmt(av)+'<span class="p-dbadge">-7% à vista</span></div><div class="p-cartao">💳 '+fmt(op.c12)+'/mês · 12x cartão</div><div class="p-boleto">Boleto 12x: '+fmt(op.b12)+'/mês</div></div></div>';}html+='</div></div>';document.getElementById('opcoes-wrap').innerHTML=html;}
+function toggleCard(cod){const card=document.getElementById('card-'+cod),chk=document.getElementById('chk-'+cod);if(SEL.has(cod)){SEL.delete(cod);card.classList.remove('sel');chk.textContent='';}else{SEL.add(cod);card.classList.add('sel');chk.textContent='✓';}}
+function gerarProposta(){const erroEl=document.getElementById('erro');erroEl.style.display='none';const nome=document.getElementById('nome').value.trim();const crm=document.getElementById('crm').value.trim();const consultor=document.getElementById('consultor').value.trim();const tel=document.getElementById('tel-medico').value.trim();const res=getVal('res');const esp=document.getElementById('esp').value;if(!nome){erroEl.textContent='Informe o nome do médico.';erroEl.style.display='block';return;}if(!tel){erroEl.textContent='Informe o telefone/WhatsApp do médico.';erroEl.style.display='block';return;}if(!consultor){erroEl.textContent='Informe o consultor responsável.';erroEl.style.display='block';return;}if(res==='nao'&&!esp){erroEl.textContent='Selecione a especialidade médica.';erroEl.style.display='block';return;}if(SEL.size===0){erroEl.textContent='Selecione pelo menos uma opção de cobertura acima.';erroEl.style.display='block';return;}const key=getPlanoKey(),pl=PLANOS[key];const opsSel=pl.opcoes.filter(o=>SEL.has(o.cod));let espTexto,perfilTexto;if(res==='sim'){const ares=getVal('ares');espTexto=ares==='go'?'Residente — Ginecologia e Obstetrícia':'Residente Médico';perfilTexto='Residente médico'+(ares==='go'?' — GO':'');}else{espTexto=ESP_LABEL[esp]||'Médico';perfilTexto=esp==='gin_obs'?'Ginecologia e Obstetrícia':DIAM.has(esp)?'Realiza procedimentos cirúrgicos':'Sem procedimentos cirúrgicos';}const hoje=new Date().toLocaleDateString('pt-BR',{day:'2-digit',month:'long',year:'numeric'});document.getElementById('ph-nome').textContent=nome;document.getElementById('ph-tel-medico').textContent=tel;document.getElementById('ph-crm').textContent=crm||'Não informado';document.getElementById('ph-esp').textContent=espTexto;document.getElementById('ph-consul').textContent=consultor;document.getElementById('ph-consul2').textContent=consultor;document.getElementById('ph-perfil').textContent=perfilTexto;document.getElementById('ph-data').textContent=hoje;document.getElementById('ph-data2').textContent=hoje;document.getElementById('ph-sub').textContent='Plano '+pl.nome+' · '+pl.subtipo;document.getElementById('ph-tabela').innerHTML=buildTab(opsSel,pl);document.getElementById('ph-comp').innerHTML=buildComp();document.getElementById('proposta').style.display='block';document.getElementById('proposta').scrollIntoView({behavior:'smooth',block:'start'});var planosSelecionados=opsSel.map(function(o){return{cod:o.cod,lmi:o.lmi,avista:fmt(o.bruto*0.93),c12:fmt(o.c12),b12:fmt(o.b12),ap:o.ap,dit:o.dit};});enviarParaCRM({nomeMedico:nome,crm:crm,consultor:consultor,telMedico:tel,especialidade:espTexto,planoNome:pl.nome,perfil:perfilTexto,sinistros:getVal('sin'),obs:document.getElementById('obs').value.trim(),planos:planosSelecionados});}
+function buildTab(ops,pl){let h='<table class="pt"><thead><tr><th>Cód.</th><th>Plano</th><th>RCP (Limite)</th><th>AP</th><th>DIT</th><th>Franquia</th><th>Prêmio Anual</th><th>À Vista (−7%)</th><th>12x Cartão</th><th style="color:#ccc;font-weight:400;font-size:10px">Boleto 12x</th></tr></thead><tbody>';for(const o of ops){const av=o.bruto*0.93;h+='<tr><td class="tc">'+o.cod+'</td><td><span class="ppill '+pl.bg+' '+pl.badge+'">'+pl.nome+'</span></td><td class="tc">'+o.lmi+'</td><td>'+o.ap+'</td><td>'+o.dit+'</td><td>Sem franquia</td><td><div class="td-cheio">'+fmt(o.bruto)+'</div></td><td><div class="td-desc">'+fmt(av)+'<span class="td-db">−7%</span></div></td><td><div class="td-cartao">'+fmt(o.c12)+'/mês</div></td><td style="opacity:.4"><div class="td-boleto">'+fmt(o.b12)+'/mês</div></td></tr>';}return h+'</tbody></table>';}
+function buildComp(){return '<div class="cgrid"><div class="cbox proc"><div class="cperc">34%</div><div class="clabel">⚖️ Despesas de Processo<br/>(Honorários, Peritos, Laudos)</div></div><div class="cbox acor"><div class="cperc">65%</div><div class="clabel">🤝 Acordos / Indenizações</div></div><div class="cbox emer"><div class="cperc">1%</div><div class="clabel">🚨 Custas Emergenciais</div></div></div>';}
+function gerarPDF(){const conteudo=document.getElementById('prop-html').innerHTML;const nome=(document.getElementById('ph-nome').textContent||'proposta').replace(/\s+/g,'_');const estilos=Array.from(document.querySelectorAll('style')).map(s=>s.outerHTML).join('');const janela=window.open('','_blank','width=900,height=700');janela.document.write('<!DOCTYPE html>\n<html lang="pt-BR">\n<head>\n<meta charset="UTF-8"/>\n<title>Proposta_RC_'+nome+'_BI2</title>\n'+estilos+'\n<style>\n  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; color-adjust: exact !important; }\n  body { margin: 0; padding: 0; background: #fff; }\n  @media screen { body { padding: 20px; } .print-btn { display: block; text-align: center; margin-bottom: 20px; } }\n  @media print { .print-btn { display: none !important; } }\n  .print-btn button { padding: 12px 32px; background: #1a3a5c; color: #fff; border: none; border-radius: 8px; font-size: 15px; font-weight: 700; cursor: pointer; }\n  .print-btn p { font-size: 13px; color: #555; margin-top: 8px; }\n</style>\n</head>\n<body>\n<div class="print-btn">\n  <button onclick="window.print()">📄 Imprimir / Salvar como PDF</button>\n  <p>Clique no botão acima → escolha "Salvar como PDF" → clique Salvar</p>\n</div>\n'+conteudo+'\n<script>window.onload=function(){setTimeout(function(){window.print();},800);};<\/script>\n</body>\n</html>');janela.document.close();}
+var URL_CRM="https://script.google.com/macros/s/AKfycby_WWj2DCG7Mr-KzQQQjgo3wdJTHn5c566d4_7TO_LEbUsfwy1Li_F1K78KlC2KvDlD/exec";
+function enviarParaCRM(dadosCotacao){fetch(URL_CRM,{method:"POST",mode:"no-cors",headers:{"Content-Type":"application/json"},body:JSON.stringify(dadosCotacao)}).then(function(){console.log("Lead enviado ao CRM com sucesso.");}).catch(function(err){console.log("Erro ao enviar ao CRM:",err);});}
+function novaCotacao(){document.getElementById('proposta').style.display='none';['nome','crm','consultor','tel-medico','obs'].forEach(id=>document.getElementById(id).value='');document.getElementById('esp').value='';document.getElementById('esp-display').value='';document.getElementById('plano-tag').style.display='none';setToggle('res','nao');setToggle('ares','geral');setToggle('sin','nenhum');SEL.clear();document.getElementById('opcoes-wrap').innerHTML='<div class="info-box info-az">👆 Selecione a especialidade acima para ver as opções disponíveis.</div>';window.scrollTo({top:0,behavior:'smooth'});}
+document.addEventListener('DOMContentLoaded',function(){const sel=document.getElementById('esp');['change','input','click'].forEach(function(evt){sel.addEventListener(evt,function(){setTimeout(onEspChange,50);});});sel.addEventListener('touchend',function(){setTimeout(onEspChange,100);});});
 </script>
 </body>
 </html>
